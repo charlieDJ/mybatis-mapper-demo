@@ -1,5 +1,6 @@
 package com.imooc.web.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.imooc.bean.Customer;
 import com.imooc.dao.CustomerDao;
 import com.imooc.dao.CustomerMapper;
@@ -25,6 +26,13 @@ public class CustomerController {
     public Customer getCustomer(@PathVariable String id){
         Customer customer = customerMapper.selectByPrimaryKey(id);
         return customer;
+    }
+
+    @GetMapping("/customer/findAll")
+    public List<Customer> findAll(){
+        PageHelper.startPage(1,3,true);
+        List<Customer> customers = customerMapper.selectAll();
+        return customers;
     }
 
     @PostMapping("/customer/age-name")
