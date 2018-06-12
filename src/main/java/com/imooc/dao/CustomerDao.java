@@ -11,5 +11,5 @@ import org.springframework.stereotype.Component;
 public interface CustomerDao {
 
     @Select("select * from Customer where id = #{id}")
-    Customer getCustomer(int id);
+    Customer getCustomer(String id);
 }

@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.imooc.bean.Customer;
 import com.imooc.dao.CustomerDao;
 import com.imooc.dao.CustomerMapper;
+import com.imooc.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,13 +19,14 @@ public class CustomerController {
 
     @Autowired
     CustomerDao customerDao;
-
     @Autowired
     CustomerMapper customerMapper;
+    @Autowired
+    private CustomerService customerService;
 
     @GetMapping("/customer/{id}")
     public Customer getCustomer(@PathVariable String id){
-        Customer customer = customerMapper.selectByPrimaryKey(id);
+        Customer customer = customerService.findById(id);
         return customer;
     }
 
