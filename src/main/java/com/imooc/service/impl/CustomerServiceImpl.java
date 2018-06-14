@@ -5,6 +5,7 @@ import com.imooc.dao.CustomerDao;
 import com.imooc.dao.CustomerMapper;
 import com.imooc.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,6 +17,7 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerDao customerDao;
 
     @Override
+    @Cacheable(value = "zh",key = "'customer_'+#id")
     public Customer findById(String id) {
         return customerDao.getCustomer(id);
     }
